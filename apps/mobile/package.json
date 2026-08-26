@@ -1,0 +1,15 @@
+{
+  "name": "@splitlery/mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo/AppEntry.js",
+  "scripts": { "start": "expo start", "typecheck": "tsc --noEmit", "test": "vitest run" },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "@splitlery/core": "*",
+    "expo": "^53.0.0",
+    "react": "^19.0.0",
+    "react-native": "^0.79.2",
+    "react-test-renderer": "^19.0.0"
+  }
+}

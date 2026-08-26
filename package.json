@@ -1,0 +1,31 @@
+{
+  "name": "splitlery",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Split the check. Not the table.",
+  "license": "MIT",
+  "repository": "https://github.com/bconnell/Splitlery.git",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "test:core": "npm run test --workspace @splitlery/core",
+    "test:web": "npm run test --workspace @splitlery/web",
+    "test:mobile": "npm run test --workspace @splitlery/mobile",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspace @splitlery/web",
+    "verify": "npm run typecheck && npm run test:core && npm run test:web && npm run test:mobile && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-test-renderer": "^19.0.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^25.0.1",
+    "react": "^19.0.0",
+    "react-test-renderer": "^19.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8",
+    "vue": "^3.5.13"
+  }
+}

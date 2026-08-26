@@ -1,0 +1,3 @@
+{
+  "expo": { "name": "Splitlery", "slug": "splitlery", "version": "1.0.0", "orientation": "portrait", "userInterfaceStyle": "light", "splash": { "backgroundColor": "#f6f4ef" }, "android": { "package": "com.splitlery.app" }, "ios": { "bundleIdentifier": "com.splitlery.app" } }
+}
