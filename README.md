@@ -7,7 +7,7 @@ Splitlery is a small receipt-splitting utility for quickly calculating what ever
 - Equal Split divides a subtotal, receipt tax, and subtotal-based tip across a group with deterministic cent remainder allocation.
 - Itemized Split assigns individual or shared items to people, then allocates the receipt tax and tip proportionally to each person’s pretax share.
 
-The calculation engine lives in `packages/core` as framework-independent TypeScript. The responsive Vue 3 web app is in `apps/web`, and the Expo React Native app is in `apps/mobile`. Both applications consume the same integer-cent calculation engine and persist only the active draft locally (`localStorage` on web and AsyncStorage on mobile).
+The calculation engine lives in `packages/core` as framework-independent TypeScript. The responsive Vue 3 web app is in `apps/web`, and the Expo React Native app is in `apps/mobile`. Both applications consume the same integer-cent calculation engine, generate distinct local person/item identities even when additions occur in the same millisecond, and persist only the active draft locally (`localStorage` on web and AsyncStorage on mobile).
 
 No account, backend, cloud sync, receipt history, analytics, telemetry, tracking, or receipt data transmission is part of Version 1. Receipt data stays on the device where the app is used.
 
