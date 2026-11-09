@@ -42,6 +42,33 @@ describe('Splitlery web workflow', () => {
     expect((wrapper.get('input[aria-label="Subtotal"]').element as HTMLInputElement).value).toBe('');
   });
 
+  it('persists separate identities for same-millisecond people and items', async () => {
+    const storage = new Map<string, string>();
+    vi.stubGlobal('localStorage', {
+      getItem: (key: string) => storage.get(key) ?? null,
+      setItem: (key: string, value: string) => storage.set(key, value),
+      removeItem: (key: string) => storage.delete(key),
+    });
+    const clock = vi.spyOn(Date, 'now').mockReturnValue(4567);
+    const wrapper = mount(App);
+    try {
+      await wrapper.get('button[aria-label="Itemized mode"]').trigger('click');
+      await wrapper.get('button[aria-label="Add person"]').trigger('click');
+      await wrapper.get('button[aria-label="Add person"]').trigger('click');
+      await wrapper.get('button[aria-label="Add item"]').trigger('click');
+      await wrapper.get('button[aria-label="Add item"]').trigger('click');
+      const saved = loadDraft();
+      expect(saved?.mode).toBe('itemized');
+      if (saved?.mode !== 'itemized') throw new Error('Expected itemized receipt');
+      expect(new Set(saved.people.map((person) => person.id)).size).toBe(saved.people.length);
+      expect(new Set(saved.items.map((item) => item.id)).size).toBe(saved.items.length);
+    } finally {
+      wrapper.unmount();
+      clock.mockRestore();
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('calculates an itemized workflow with a shared item, tax, tip, and visible reconciliation', async () => {
     const storage = new Map<string, string>();
     vi.stubGlobal('localStorage', { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value), removeItem: (key: string) => storage.delete(key) });
