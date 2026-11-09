@@ -31,9 +31,9 @@ function restore(): void {
 }
 function calculateReceipt(): void { try { error.value = ''; result.value = calculate(draftFromForm()); persist(); } catch (cause) { result.value = null; error.value = cause instanceof Error ? cause.message : 'Check the receipt details and try again.'; } }
 function selectMode(next: Mode): void { mode.value = next; result.value = null; error.value = ''; persist(); }
-function addPerson(): void { people.value.push({ id: `person-${Date.now()}`, name: `Person ${people.value.length + 1}` }); persist(); }
+function addPerson(): void { people.value.push({ id: createDraftEntityId('person', people.value.map((person) => person.id)), name: `Person ${people.value.length + 1}` }); persist(); }
 function removePerson(id: string): void { if (items.value.some((item) => item.participantIds.includes(id))) { error.value = 'Remove this person from their items before removing them.'; return; } people.value = people.value.filter((person) => person.id !== id); persist(); }
-function addItem(): void { items.value.push({ id: `item-${Date.now()}`, name: '', amount: '', participantIds: [] }); persist(); }
+function addItem(): void { items.value.push({ id: createDraftEntityId('item', items.value.map((item) => item.id)), name: '', amount: '', participantIds: [] }); persist(); }
 function removeItem(id: string): void { items.value = items.value.filter((item) => item.id !== id); persist(); }
 function toggleParticipant(item: FormItem, id: string): void { item.participantIds = item.participantIds.includes(id) ? item.participantIds.filter((current) => current !== id) : [...item.participantIds, id]; persist(); }
 function resetReceipt(): void { clearDraft(); mode.value = 'equal'; equalSubtotal.value = ''; equalTax.value = ''; equalPeople.value = '2'; equalTip.value = '18%'; equalCustomTip.value = ''; const d = defaultItemizedDraft(); people.value = d.people; items.value = []; itemTax.value = ''; itemTip.value = '18%'; itemCustomTip.value = ''; result.value = null; error.value = ''; showResetConfirm.value = false; }
