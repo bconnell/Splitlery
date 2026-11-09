@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { calculate, defaultItemizedDraft, formatCurrency, parseCurrencyToCents, type CalculationSummary, type ItemizedReceiptDraft, type ReceiptItem, type TipSelection } from '@splitlery/core';
+import { calculate, defaultItemizedDraft, createDraftEntityId, formatCurrency, parseCurrencyToCents, type CalculationSummary, type ItemizedReceiptDraft, type ReceiptItem, type TipSelection } from '@splitlery/core';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { clearDraft, loadDraft, saveDraft } from './src/storage';
