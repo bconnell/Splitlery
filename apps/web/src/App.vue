@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { calculate, defaultItemizedDraft, formatCurrency, parseCurrencyToCents, type CalculationSummary, type EqualReceiptDraft, type ItemizedReceiptDraft, type ReceiptDraft, type ReceiptItem, type TipSelection } from '@splitlery/core';
+import { calculate, defaultItemizedDraft, createDraftEntityId, formatCurrency, parseCurrencyToCents, type CalculationSummary, type EqualReceiptDraft, type ItemizedReceiptDraft, type ReceiptDraft, type ReceiptItem, type TipSelection } from '@splitlery/core';
 import { clearDraft, loadDraft, saveDraft } from './storage';
 
 type Mode = 'equal' | 'itemized';
